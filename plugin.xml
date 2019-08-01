@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-bdasr"
+        version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+    <name>bdasr</name>
+    <preference name="APIKEY"/>
+    <preference name="SECRETKEY"/>
+    <preference name="APPID"/>
+    <js-module name="bdasr" src="www/bdasr.js">
+        <clobbers target="cordova.plugins.bdasr"/>
+    </js-module>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="bdasr">
+                <param name="ios-package" value="bdasr"/>
+            </feature>
+            <preference name="bdasrappid" value="$APPID"/>
+            <preference name="bdasrapikey" value="$APIKEY"/>
+            <preference name="bdasrsecretkey" value="$SECRETKEY"/>
+        </config-file>
+
+        <framework src="libc++.tbd" weak="true"/>
+        <framework src="libz.1.2.5.tbd" weak="true"/>
+        <framework src="AudioToolbox.framework" weak="true"/>
+        <framework src="AVFoundation.framework" weak="true"/>
+        <framework src="CFNetwork.framework" weak="true"/>
+        <framework src="CoreLocation.framework" weak="true"/>
+        <framework src="CoreTelephony.framework" weak="true"/>
+        <framework src="SystemConfiguration.framework" weak="true"/>
+
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSASRDefines.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSASRParameters.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSEventManager.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSUploaderDefines.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSUploaderParameters.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSWakeupDefines.h"/>
+        <header-file src="src/ios/BDSClientHeaders/ASR/BDSWakeupParameters.h"/>
+
+        <resource-file src="src/ios/BDSClientLib/BDSClientResource.bundle"/>
+
+        <source-file framework="true" src="src/ios/BDSClientLib/libBaiduSpeechSDK.a"/>
+        <source-file src="src/ios/bdasr.m"/>
+
+        <config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
+            <string>是否允许[美车驿站]使用您的麦克风？</string>
+        </config-file>
+
+    </platform>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="bdasr">
+                <param name="android-package" value="cn.hhjjj.bdasr.bdasr"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data
+                    android:name="com.baidu.speech.APP_ID"
+                    android:value="$APPID"/>
+            <meta-data
+                    android:name="com.baidu.speech.API_KEY"
+                    android:value="$APIKEY"/>
+            <meta-data
+                    android:name="com.baidu.speech.SECRET_KEY"
+                    android:value="$SECRETKEY"/>
+            <service
+                    android:name="com.baidu.speech.VoiceRecognitionService"
+                    android:exported="false"/>
+        </config-file>
+
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        </config-file>
+
+
+        <resource-file src="src/android/libs/arm64-v8a/libBaiduSpeechSDK.so"
+                       target="jniLibs/arm64-v8a/libBaiduSpeechSDK.so"/>
+        <resource-file src="src/android/libs/arm64-v8a/libvad.dnn.so" target="jniLibs/arm64-v8a/libvad.dnn.so"/>
+
+        <resource-file src="src/android/libs/armeabi/libBaiduSpeechSDK.so" target="jniLibs/armeabi/libBaiduSpeechSDK.so"/>
+        <resource-file src="src/android/libs/armeabi/libvad.so" target="jniLibs/armeabi/libvad.so"/>
+
+        <resource-file src="src/android/libs/armeabi-v7a/libBaiduSpeechSDK.so"
+                       target="jniLibs/armeabi-v7a/libBaiduSpeechSDK.so"/>
+        <resource-file src="src/android/libs/armeabi-v7a/libvad.dnn.so" target="jniLibs/armeabi-v7a/libvad.dnn.so"/>
+
+        <resource-file src="src/android/libs/x86/libBaiduSpeechSDK.so" target="jniLibs/x86/libBaiduSpeechSDK.so"/>
+        <resource-file src="src/android/libs/x86/libvad.dnn.so" target="jniLibs/x86/libvad.dnn.so"/>
+
+        <resource-file src="src/android/libs/x86_64/libBaiduSpeechSDK.so" target="jniLibs/x86_64/libBaiduSpeechSDK.so"/>
+        <resource-file src="src/android/libs/x86_64/libvad.dnn.so" target="jniLibs/x86_64/libvad.dnn.so"/>
+
+        <lib-file src="src/android/libs/bdasr_V3_20190515_c9eed5d.jar"/>
+        <source-file src="src/android/bdasr.java" target-dir="src/cn/hhjjj/bdasr"/>
+
+    </platform>
+</plugin>
