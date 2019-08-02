@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-bdasr"
-        version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+        version="1.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>bdasr</name>
     <preference name="APIKEY"/>
     <preference name="SECRETKEY"/>
@@ -80,7 +80,7 @@
         <resource-file src="src/android/libs/arm64-v8a/libvad.dnn.so" target="jniLibs/arm64-v8a/libvad.dnn.so"/>
 
         <resource-file src="src/android/libs/armeabi/libBaiduSpeechSDK.so" target="jniLibs/armeabi/libBaiduSpeechSDK.so"/>
-        <resource-file src="src/android/libs/armeabi/libvad.so" target="jniLibs/armeabi/libvad.so"/>
+        <resource-file src="src/android/libs/armeabi/libvad.dnn.so" target="jniLibs/armeabi/libvad.dnn.so"/>
 
         <resource-file src="src/android/libs/armeabi-v7a/libBaiduSpeechSDK.so"
                        target="jniLibs/armeabi-v7a/libBaiduSpeechSDK.so"/>

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-bdasr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a cordova plugin, a JS version of bdasr",
   "cordova": {
     "id": "cordova-plugin-bdasr",
